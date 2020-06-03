@@ -12,7 +12,6 @@ export class AttractorComponent implements OnInit {
   ngOnInit(): void {}
 
   start() {
-    console.log('asd');
     this.router.navigate(['interaction']);
   }
 }
