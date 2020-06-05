@@ -1,28 +1,30 @@
-
 .interaction {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    .error {
-        min-width: 500px;
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
 
-        .text {
-            margin-bottom: 2rem;
-        }
+  .form {
+    width: 80%;
 
-        .button {
-            padding: 1rem 2rem;
-            outline: none;
-            border: 2px solid white;
-            border-radius: 0.5rem;
-            background: transparent;
-            color: white;
-        }
-     }
+    .input {
+      margin-bottom: 4rem;
+      font-size: 1.5rem;
+      width: 100%;
+
+      &::placeholder {
+        color: white;
+      }
+    }
+  }
+
+  .error {
+    min-width: 500px;
+
+    .text {
+      margin-bottom: 2rem;
+    }
+
+  }
 }

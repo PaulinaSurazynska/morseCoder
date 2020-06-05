@@ -1,7 +1,11 @@
-<section class="interaction">
+<main class="interaction">
   <img src="assets/background.png" class="img" (click)="attractor()">
-  <div class="error" *ngIf="isError" >
-  <p class="text">{{errorMsg}}</p>
-  <button type="button" (click)="attractor()" class="button">Go back to attractor</button>
-  </div>
-</section>
+  <form class="form">
+    <input type="text" placeholder="enter word" class="input">
+    <button class="button" type="submit">translate</button>
+  </form>
+  <section class="error" *ngIf="isError">
+    <p class="text">{{errorMsg}}</p>
+    <button type="button" (click)="attractor()" class="button">Go back to attractor</button>
+  </section>
+</main>
