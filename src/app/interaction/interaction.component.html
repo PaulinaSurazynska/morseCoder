@@ -1,7 +1,8 @@
 <main class="interaction">
   <img src="assets/background.png" class="img" (click)="attractor()">
   <form class="form">
-    <input type="text" placeholder="enter word" class="input">
+    <input type="text" placeholder="phrese to translate" class="input">
+    <span class="counter"> You have used 20 out of 20 letters </span>
     <button class="button" type="submit">translate</button>
   </form>
   <section class="error" *ngIf="isError">

@@ -9,13 +9,16 @@
     width: 80%;
 
     .input {
-      margin-bottom: 4rem;
       font-size: 1.5rem;
       width: 100%;
 
       &::placeholder {
         color: white;
       }
+    }
+
+    .counter {
+      margin: 1rem 0 2rem 0;
     }
   }
 
