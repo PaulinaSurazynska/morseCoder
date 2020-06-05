@@ -1,3 +1,7 @@
 <section class="interaction">
   <img src="assets/background.png" class="img" (click)="attractor()">
+  <div class="error" *ngIf="isError" >
+  <p class="text">{{errorMsg}}</p>
+  <button type="button" (click)="attractor()" class="button">Go back to attractor</button>
+  </div>
 </section>

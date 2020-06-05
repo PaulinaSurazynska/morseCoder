@@ -10,6 +10,8 @@ import { Data } from '../models/data';
   styleUrls: ['./interaction.component.scss'],
 })
 export class InteractionComponent implements OnInit {
+  isError: boolean = false;
+  errorMsg: '';
   data: Data;
   constructor(private router: Router, private dataService: DataService) {}
 
@@ -18,10 +20,16 @@ export class InteractionComponent implements OnInit {
   }
 
   getData() {
-    this.dataService.getData().subscribe((data) => {
-      this.data = data;
-      console.log('data: ', data);
-    });
+    this.dataService.getData().subscribe(
+      (data) => {
+        this.data = data;
+        console.log('data: ', data);
+      },
+      (err) => {
+        this.isError = true;
+        this.errorMsg = err;
+      },
+    );
     // convert to array
   }
 
