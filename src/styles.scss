@@ -41,6 +41,10 @@ button {
   background: transparent;
   color: white;
   letter-spacing: 0.1rem;
+
+  &.disabled {
+    cursor: not-allowed;
+  }
 }
 
 /* set up background as images not as bg-img css property ->  smooth route animations  */
