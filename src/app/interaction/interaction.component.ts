@@ -24,11 +24,6 @@ export class InteractionComponent implements OnInit {
     this.dataService.getData().subscribe(
       (data) => {
         this.data = data;
-
-        console.log('this.data key', Object.keys(this.data));
-        Object.keys(this.data).map((word) =>
-          console.log('morseCode object assing to sign: ', this.data[word]),
-        );
       },
       (err) => {
         this.isError = true;
@@ -37,12 +32,13 @@ export class InteractionComponent implements OnInit {
     );
   }
 
-  onSubmit(word) {
-    console.log(word);
+  onSubmit(value) {
     // remove white spaces, transform to lowercase
-    let value = word.toLowerCase().replace(/\s/g, '').split('');
-    console.log(value);
-    // check input value agains keys from this.data
+    let letters = value.toLowerCase().replace(/\s/g, '').split('');
+    console.log(letters);
+    // check input value agains this.data;  go through array of letters from the input and return only these ones where input value corrensponds to value of key in this.data object
+    let morseCode = letters.map((letter: string) => this.data[letter]);
+    console.log(morseCode);
   }
 
   attractor() {
