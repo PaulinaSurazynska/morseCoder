@@ -22,6 +22,15 @@
     }
   }
 
+  .result {
+    position: absolute;
+    bottom: 14rem;
+
+    .sign {
+      padding: 0.5rem;
+    }
+  }
+
   .error {
     min-width: 500px;
 

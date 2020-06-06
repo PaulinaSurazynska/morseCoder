@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { DataService } from '../service/data.service';
 import { Data } from '../models/data';
+import { analyzeFileForInjectables } from '@angular/compiler';
 
 @Component({
   selector: 'app-interaction',
@@ -14,6 +15,8 @@ export class InteractionComponent implements OnInit {
   errorMsg = '';
   data: Data;
   word = '';
+  morseCodeArr: any = [];
+  dotDashArr: any = [];
   constructor(private router: Router, private dataService: DataService) {}
 
   ngOnInit() {
@@ -35,10 +38,20 @@ export class InteractionComponent implements OnInit {
   onSubmit(value) {
     // remove white spaces, transform to lowercase
     let letters = value.toLowerCase().replace(/\s/g, '').split('');
-    console.log(letters);
-    // check input value agains this.data;  go through array of letters from the input and return only these ones where input value corrensponds to value of key in this.data object
-    let morseCode = letters.map((letter: string) => this.data[letter]);
-    console.log(morseCode);
+    // console.log(letters);
+    // check input value against this.data; go through array of letters from the input and return only these ones where input value corrensponds to value of key in this.data object
+    this.morseCodeArr = letters.map((letter: string) => this.data[letter]);
+    console.log(this.morseCodeArr);
+  }
+
+  convertToImgs(arr) {
+    return arr.split('').map((el) => {
+      if (el === '.') {
+        return (el = 'dot');
+      } else {
+        return (el = 'dash');
+      }
+    });
   }
 
   attractor() {

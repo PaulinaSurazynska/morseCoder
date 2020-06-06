@@ -7,8 +7,19 @@
     <button class="button" type="submit" [disabled]="!form.valid"
       [ngClass]="{'disabled': !form.valid}">translate</button>
   </form>
+  <!-- <div class="result">
+    <span *ngFor="let sign of morseCode">{{sign.telephony}}</span>
+  </div> -->
   <section class="error" *ngIf="isError">
     <p class="text">{{errorMsg}}</p>
     <button type="button" (click)="attractor()" class="button">Go back to attractor</button>
   </section>
+  <div class="result">
+    <div *ngFor="let sign of morseCodeArr" class="sign">
+      <span>{{sign.telephony}}</span>
+      <div *ngFor="let img of convertToImgs(sign.morsecode)">
+        <img src="../../assets/{{img}}.png" />
+      </div>
+    </div>
+  </div>
 </main>
