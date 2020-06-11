@@ -1,5 +1,5 @@
 <main class="interaction">
-  <img src="assets/background.png" class="img" (click)="attractor()">
+  <img src="assets/background.png" class="background" (click)="attractor()">
   <form class="form" (ngSubmit)="onSubmit(word)" #form="ngForm">
     <input type="text" placeholder="type your word here..." class="input" required name="word" [(ngModel)]="word"
       autocomplete="off" maxlength="20">
@@ -7,18 +7,15 @@
     <button class="button" type="submit" [disabled]="!form.valid"
       [ngClass]="{'disabled': !form.valid}">translate</button>
   </form>
-  <!-- <div class="result">
-    <span *ngFor="let sign of morseCode">{{sign.telephony}}</span>
-  </div> -->
   <section class="error" *ngIf="isError">
     <p class="text">{{errorMsg}}</p>
     <button type="button" (click)="attractor()" class="button">Go back to attractor</button>
   </section>
   <div class="result">
     <div *ngFor="let sign of morseCodeArr" class="sign">
-      <span>{{sign.telephony}}</span>
-      <div *ngFor="let img of convertToImgs(sign.morsecode)">
-        <img src="../../assets/{{img}}.png" />
+      <img *ngFor="let img of convertToImgs(sign.morsecode)" src="../../assets/{{img}}.png" />
+      <div class="telephony">
+        <span>{{sign.telephony}}</span>
       </div>
     </div>
   </div>
