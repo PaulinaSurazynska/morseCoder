@@ -15,11 +15,25 @@ export class UserActivityService {
     clearTimeout(this.userActivityTimeout);
     this.userActivityTimeout = setTimeout(() => {
       this.inactiveUserAction();
-    }, 3000);
+      console.log('I am going back!');
+    }, 8000);
   };
 
   inactiveUserAction() {
     // no user activity => go back to attractor
     this.router.navigate(['']);
+  }
+
+  activateTracingUserActivity() {
+    window.addEventListener('click', this.resetUserActivityTimeout);
+    window.addEventListener('mousemove', this.resetUserActivityTimeout);
+    window.addEventListener('keypress', this.resetUserActivityTimeout);
+  }
+
+  disactivateTracingUserAcivity() {
+    window.removeEventListener('click', this.resetUserActivityTimeout);
+    window.removeEventListener('mousemove', this.resetUserActivityTimeout);
+    window.removeEventListener('keypress', this.resetUserActivityTimeout);
+    clearTimeout(this.userActivityTimeout);
   }
 }

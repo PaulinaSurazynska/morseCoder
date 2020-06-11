@@ -30,17 +30,14 @@ export class InteractionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getData();
-
-    window.addEventListener('click', this.userActivityService.resetUserActivityTimeout);
-    window.addEventListener('keypress', this.userActivityService.resetUserActivityTimeout);
+    // start tracing user activity
+    this.userActivityService.activateTracingUserActivity();
   }
 
   getData() {
     // subscribe to data from the servicse
     this.dataService.getData().subscribe(
-      (data) => {
-        this.data = data;
-      }, // in case of error => let user know about it ;)
+      (data) => (this.data = data), // in case of error => let user know about it ;)
       (err) => {
         this.isError = true;
         this.errorMsg = err;
@@ -80,8 +77,6 @@ export class InteractionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // remove all events listeners and clear timeout
-    window.removeEventListener('click', this.userActivityService.resetUserActivityTimeout);
-    window.removeEventListener('keypress', this.userActivityService.resetUserActivityTimeout);
-    clearTimeout(this.userActivityService.userActivityTimeout);
+    this.userActivityService.disactivateTracingUserAcivity();
   }
 }
