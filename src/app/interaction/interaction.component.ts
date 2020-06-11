@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataService } from '../service/data.service';
+import { UserActivityService } from '../service/user-activity.service';
 import { Data } from '../models/data';
-import { formAnimation, resultAnimation } from '../animations/animations';
+import { formAnimation } from '../animations/animations';
 
 @Component({
   selector: 'app-interaction',
@@ -11,7 +12,7 @@ import { formAnimation, resultAnimation } from '../animations/animations';
   styleUrls: ['./interaction.component.scss'],
   animations: [formAnimation],
 })
-export class InteractionComponent implements OnInit {
+export class InteractionComponent implements OnInit, OnDestroy {
   animationState = 'initial';
   data: Data;
   dotDashArr: any = [];
@@ -21,17 +22,25 @@ export class InteractionComponent implements OnInit {
   morseCodeArr: any = [];
   word = '';
 
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+    private userActivityService: UserActivityService,
+  ) {}
 
   ngOnInit() {
     this.getData();
+
+    window.addEventListener('click', this.userActivityService.resetUserActivityTimeout);
+    window.addEventListener('keypress', this.userActivityService.resetUserActivityTimeout);
   }
 
   getData() {
+    // subscribe to data from the servicse
     this.dataService.getData().subscribe(
       (data) => {
         this.data = data;
-      },
+      }, // in case of error => let user know about it ;)
       (err) => {
         this.isError = true;
         this.errorMsg = err;
@@ -67,5 +76,12 @@ export class InteractionComponent implements OnInit {
 
   attractor() {
     this.router.navigate(['']);
+  }
+
+  ngOnDestroy() {
+    // remove all events listeners and clear timeout
+    window.removeEventListener('click', this.userActivityService.resetUserActivityTimeout);
+    window.removeEventListener('keypress', this.userActivityService.resetUserActivityTimeout);
+    clearTimeout(this.userActivityService.userActivityTimeout);
   }
 }
