@@ -12,6 +12,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
 })
 export class InteractionComponent implements OnInit {
   isError: boolean = false;
+  isResultVisible: boolean = false;
   errorMsg = '';
   data: Data;
   word = '';
@@ -38,20 +39,19 @@ export class InteractionComponent implements OnInit {
   onSubmit(value) {
     // remove white spaces, transform to lowercase
     let letters = value.toLowerCase().replace(/\s/g, '').split('');
-    // console.log(letters);
+
     // check input value against this.data; go through array of letters from the input and return only these ones where input value corrensponds to value of key in this.data object
     this.morseCodeArr = letters.map((letter: string) => this.data[letter]);
-    console.log(this.morseCodeArr);
+    // show result
+    this.isResultVisible = true;
+
+    // clear input field
+    this.word = '';
   }
 
-  convertToImgs(arr) {
-    return arr.split('').map((el) => {
-      if (el === '.') {
-        return (el = 'dot');
-      } else {
-        return (el = 'dash');
-      }
-    });
+  convertToImgs(morseCode) {
+    // assing  morsecode sign to corresonding img
+    return morseCode.split('').map((el) => (el === '.' ? (el = 'dot') : (el = 'dash')));
   }
 
   attractor() {

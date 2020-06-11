@@ -11,12 +11,15 @@
     <p class="text">{{errorMsg}}</p>
     <button type="button" (click)="attractor()" class="button">Go back to attractor</button>
   </section>
-  <div class="result">
-    <div *ngFor="let sign of morseCodeArr" class="sign">
-      <img *ngFor="let img of convertToImgs(sign.morsecode)" src="../../assets/{{img}}.png" />
-      <div class="telephony">
-        <span>{{sign.telephony}}</span>
+  <section class="result" *ngIf="isResultVisible">
+    <div class="morsecode">
+      <div *ngFor="let sign of morseCodeArr" class="sign">
+        <img *ngFor="let img of convertToImgs(sign.morsecode)" src="../../assets/{{img}}.png" />
+        <div class="telephony">
+          <span>{{sign.telephony}}</span>
+        </div>
       </div>
     </div>
-  </div>
+    <button class="button">Try again</button>
+  </section>
 </main>
