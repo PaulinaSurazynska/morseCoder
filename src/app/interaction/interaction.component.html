@@ -1,6 +1,6 @@
 <main class="interaction">
-  <img src="assets/background.png" class="background" (click)="attractor()">
-  <form class="form" (ngSubmit)="onSubmit(word)" #form="ngForm">
+  <img src="assets/background.png" class="background">
+  <form class="form" (ngSubmit)="onSubmit(word)" #form="ngForm" [@formAnimation]="animationState">
     <input type="text" placeholder="type your word here..." class="input" required name="word" [(ngModel)]="word"
       autocomplete="off" maxlength="20">
     <span class="counter"> You have used {{word ? word.length : 0 }} out of 20 letters </span>
@@ -11,7 +11,10 @@
     <p class="text">{{errorMsg}}</p>
     <button type="button" (click)="attractor()" class="button">Go back to attractor</button>
   </section>
-  <section class="result" *ngIf="isResultVisible">
+  <section class="result" *ngIf="isResultVisible" [@formAnimation]="animationState === 'active'">
+    <div class="word">
+      <span>" {{word}} "</span>
+    </div>
     <div class="morsecode">
       <div *ngFor="let sign of morseCodeArr" class="sign">
         <img *ngFor="let img of convertToImgs(sign.morsecode)" src="../../assets/{{img}}.png" />
@@ -20,6 +23,6 @@
         </div>
       </div>
     </div>
-    <button class="button">Try again</button>
+    <button class="button" (click)="tryAgain()">Try again</button>
   </section>
 </main>

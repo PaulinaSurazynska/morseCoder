@@ -1,4 +1,4 @@
-import { trigger, animate, style, query, transition } from '@angular/animations';
+import { trigger, animate, style, query, transition, state } from '@angular/animations';
 
 export const routeAnimations = trigger('routeAnimations', [
   transition('*<=>*', [
@@ -24,4 +24,21 @@ export const routeAnimations = trigger('routeAnimations', [
       optional: true,
     }),
   ]),
+]);
+
+export const formAnimation = trigger('formAnimation', [
+  state(
+    'initial',
+    style({
+      opacity: 1,
+    }),
+  ),
+  state(
+    'active',
+    style({
+      opacity: 0,
+    }),
+  ),
+  transition('initial => active', animate('0.3s')),
+  transition('active => initial', animate('0.5s')),
 ]);

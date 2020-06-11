@@ -18,15 +18,21 @@
     }
 
     .counter {
-      margin: 1rem 0 2rem 0;
+      margin: 2rem 0;
     }
   }
 
   .result {
     width: 100%;
-    position: absolute;
-    bottom: 3rem;
-    border: 1px solid;
+    min-height: 20rem;
+    justify-content: space-between;
+
+    .word {
+      font-size: 2rem;
+      letter-spacing: 0.2rem;
+      font-weight: 600;
+      font-style: italic;
+    }
 
     .morsecode {
 
@@ -43,7 +49,6 @@
         margin-top: 1rem;
       }
     }
-
   }
 
   .error {

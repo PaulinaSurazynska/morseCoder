@@ -3,21 +3,24 @@ import { Router } from '@angular/router';
 
 import { DataService } from '../service/data.service';
 import { Data } from '../models/data';
-import { analyzeFileForInjectables } from '@angular/compiler';
+import { formAnimation, resultAnimation } from '../animations/animations';
 
 @Component({
   selector: 'app-interaction',
   templateUrl: './interaction.component.html',
   styleUrls: ['./interaction.component.scss'],
+  animations: [formAnimation],
 })
 export class InteractionComponent implements OnInit {
+  animationState = 'initial';
+  data: Data;
+  dotDashArr: any = [];
+  errorMsg = '';
   isError: boolean = false;
   isResultVisible: boolean = false;
-  errorMsg = '';
-  data: Data;
-  word = '';
   morseCodeArr: any = [];
-  dotDashArr: any = [];
+  word = '';
+
   constructor(private router: Router, private dataService: DataService) {}
 
   ngOnInit() {
@@ -45,13 +48,21 @@ export class InteractionComponent implements OnInit {
     // show result
     this.isResultVisible = true;
 
-    // clear input field
-    this.word = '';
+    // toggle form and result visiblity
+    this.animationState = this.animationState === 'initial' ? 'active' : 'initial';
   }
 
   convertToImgs(morseCode) {
     // assing  morsecode sign to corresonding img
     return morseCode.split('').map((el) => (el === '.' ? (el = 'dot') : (el = 'dash')));
+  }
+
+  tryAgain() {
+    this.isResultVisible = false;
+    this.animationState = 'initial';
+
+    // clear input field here => word you want to translate is visible in result div
+    this.word = '';
   }
 
   attractor() {
